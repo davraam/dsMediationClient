@@ -53,6 +53,10 @@ ds.mediate <- function(model.m=NULL, model.y=NULL, treat = NULL, mediator = NULL
   if(is.null(model.y)){
     stop(" Please provide the name of the fitted model object for outcome!", call.=FALSE)
   }
+  
+  # check if the model outcomes are defined in all studies
+  defined <- dsBaseClient:::isDefined(datasources, model.m)
+  defined <- dsBaseClient:::isDefined(datasources, model.y)
 
   treat.name <- treat
   med.name <- mediator
