@@ -40,41 +40,12 @@ ds.mediationTest <- function(mv=NULL, iv=NULL, dv=NULL, datasources=NULL){
     stop("Please provide the name of the dependent variable!", call.=FALSE)
   }
   
-  # the input variables might be given as column table (i.e. D$x)
-  # or just as vectors not attached to a table (i.e. x)
-  # we have to make sure the function deals with each case
-  mv.names <- dsBaseClient:::extract(mv)
-  mv.varname <- mv.names$elements
-  mv.obj2lookfor <- mv.names$holders
+  # check if the input objects are defined in all studies
+  mv.defined <- dsBaseClient:::isDefined(datasources, mv)
+  iv.defined <- dsBaseClient:::isDefined(datasources, iv)
+  dv.defined <- dsBaseClient:::isDefined(datasources, dv)
   
-  iv.names <- dsBaseClient:::extract(iv)
-  iv.varname <- iv.names$elements
-  iv.obj2lookfor <- iv.names$holders
-  
-  dv.names <- dsBaseClient:::extract(dv)
-  dv.varname <- dv.names$elements
-  dv.obj2lookfor <- dv.names$holders
-  
-  # check if the input objects are defined in all the studies
-  if(is.na(mv.obj2lookfor)){
-    mv.defined <- dsBaseClient:::isDefined(datasources, mv.varname)
-  }else{
-    mv.defined <- dsBaseClient:::isDefined(datasources, mv.obj2lookfor)
-  }
-  
-  if(is.na(iv.obj2lookfor)){
-    iv.defined <- dsBaseClient:::isDefined(datasources, iv.varname)
-  }else{
-    iv.defined <- dsBaseClient:::isDefined(datasources, iv.obj2lookfor)
-  }
-  
-  if(is.na(mv.obj2lookfor)){
-    dv.defined <- dsBaseClient:::isDefined(datasources, dv.varname)
-  }else{
-    dv.defined <- dsBaseClient:::isDefined(datasources, dv.obj2lookfor)
-  }
-  
-  # call the internal function that checks the input objects are of the same class in all studies.
+  # check if the input objects are of the same class in all studies
   mv.typ <- dsBaseClient:::checkClass(datasources, mv)
   iv.typ <- dsBaseClient:::checkClass(datasources, iv)
   dv.typ <- dsBaseClient:::checkClass(datasources, dv)
