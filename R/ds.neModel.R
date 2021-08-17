@@ -49,7 +49,7 @@ ds.neModel <- function(formula=NULL, family=NULL, expData=NULL, se="bootstrap", 
   
   # if the argument 'expData' is set, check that the data frame is defined (i.e. exists) on the server side
   if(!(is.null(expData))){
-    defined <- isDefined(datasources, expData)
+    defined <- dsBaseClient:::isDefined(datasources, expData)
   }
   
   # check if 'se' is either 'bootstrap' or 'robust'
