@@ -33,6 +33,9 @@ ds.test.TMint <- function(x=NULL, conf.level=NULL, datasources=NULL){
   if(is.null(x)){
     stop(" Please provide the name of the assigned output object from the ds.mediate function!", call.=FALSE)
   }
+  
+  # check if the mediate object is defined in all studies
+  defined <- dsBaseClient:::isDefined(datasources, x)
 
   calltext <- call('test.TMintDS', x, conf.level)
   out <- DSI::datashield.aggregate(datasources, calltext)

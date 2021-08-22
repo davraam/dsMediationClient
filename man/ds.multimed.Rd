@@ -25,12 +25,12 @@ the parallel design this is the only mediator variable used in the estimation.}
 
 \item{med.alt}{vector of character strings indicating the names of the 
 post-treatment confounders, i.e., the alternative mediators affecting both the
-main mediator and outcome. Not needed for the parallel design.}
+main mediator and outcome.}
 
 \item{treat}{a string character, the name of the treatment variable in 'data'.}
 
 \item{covariates}{vector of character strings representing the names of the
-pre-treatment covariates. Cannot be used for the parallel design.}
+pre-treatment covariates.}
 
 \item{data}{a string character, the name of data frame containing all the 
 above variables.}
@@ -61,8 +61,7 @@ It estimates the average causal mediation effects (indirect effects) and the
 average direct effects under the homogeneous interaction assumption based on a
 varying-coefficient linear structural equation model. The function also performs
 sensitivity analysis with respect to the violation of the homogenous interaction
-assumption. The function can be used for both the single experiment design and
-the parallel design.
+assumption. The function can be used for the single experiment design.
 }
 \author{
 Demetris Avraam, for DataSHIELD Development Team
