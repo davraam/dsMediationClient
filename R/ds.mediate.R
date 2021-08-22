@@ -55,8 +55,8 @@ ds.mediate <- function(model.m=NULL, model.y=NULL, treat = NULL, mediator = NULL
   }
   
   # check if the model outcomes are defined in all studies
-  defined <- dsBaseClient:::isDefined(datasources, model.m)
-  defined <- dsBaseClient:::isDefined(datasources, model.y)
+  defined.m <- dsBaseClient:::isDefined(datasources, model.m)
+  defined.y <- dsBaseClient:::isDefined(datasources, model.y)
 
   treat.name <- treat
   med.name <- mediator

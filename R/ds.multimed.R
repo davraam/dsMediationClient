@@ -9,17 +9,16 @@
 #' average direct effects under the homogeneous interaction assumption based on a
 #' varying-coefficient linear structural equation model. The function also performs
 #' sensitivity analysis with respect to the violation of the homogenous interaction
-#' assumption. The function can be used for both the single experiment design and
-#' the parallel design.
+#' assumption. The function can be used for the single experiment design.
 #' @param outcome a string character, the name of the outcome variable in 'data'.
 #' @param med.main a string character, the name of the mediator of interest. Under
 #' the parallel design this is the only mediator variable used in the estimation.
 #' @param med.alt vector of character strings indicating the names of the 
 #' post-treatment confounders, i.e., the alternative mediators affecting both the
-#' main mediator and outcome. Not needed for the parallel design.
+#' main mediator and outcome. 
 #' @param treat a string character, the name of the treatment variable in 'data'.
 #' @param covariates vector of character strings representing the names of the
-#' pre-treatment covariates. Cannot be used for the parallel design.
+#' pre-treatment covariates.
 #' @param data a string character, the name of data frame containing all the 
 #' above variables.
 #' @param sims a number of bootstrap samples used for the calculation of 
@@ -57,14 +56,40 @@ ds.multimed <- function(outcome = NULL, med.main = NULL, med.alt = NULL, treat =
     stop(" Please provide the name of the treatment variable!", call.=FALSE)
   }
   
+  # verify that the dataframe name is provided
+  if(is.null(data)){
+    stop(" Please provide the name of the data frame!", call.=FALSE)
+  }
+  
+  # check if the input objects are defined in all studies
+  defined.outcome <- dsBaseClient:::isDefined(datasources, paste0(data, "$", outcome))
+  defined.med.main <- dsBaseClient:::isDefined(datasources, paste0(data, "$", med.main))
+  defined.treat <- dsBaseClient:::isDefined(datasources, paste0(data, "$", treat))
+  if(!is.null(covariates)){
+    lapply(covariates, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", x))})
+  }  
+  if(!is.null(med.alt)){
+    lapply(med.alt, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", x))})
+  }
+    
+  # transmittable names  
   outcome.name <- outcome
   med.main.name <- med.main
   treat.name <- treat
   data.name <- data
-  covariates.transmit <- paste0(as.character(covariates), collapse=",")
+  if(!is.null(covariates)){
+    covariates.transmit <- paste0(as.character(covariates), collapse=",")
+  }else{
+    covariates.transmit <- NULL
+  }
+  if(!is.null(med.alt)){
+    med.alt.transmit <- paste0(as.character(med.alt), collapse=",")
+  }else{
+    med.alt.transmit <- NULL
+  }
   
-  
-  calltext <- call('multimedDS', outcome.name, med.main.name, med.alt, treat.name, covariates.transmit, data, sims, seed, conf.level)
+  calltext <- call('multimedDS', outcome.name, med.main.name, med.alt.transmit, 
+                   treat.name, covariates.transmit, data, sims, seed, conf.level)
   study.summary <- DSI::datashield.aggregate(datasources, calltext)
   
   return(study.summary)
