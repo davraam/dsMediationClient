@@ -8,7 +8,7 @@ ds.neModel(
   formula = NULL,
   family = NULL,
   expData = NULL,
-  se = "bootstrap",
+  se = "robust",
   nBoot = 1000,
   newobj = NULL,
   datasources = NULL
@@ -18,7 +18,7 @@ ds.neModel(
 \item{formula}{a formula object providing a symbolic description of the 
 natural effect model.}
 
-\item{family}{aa description of the error distribution and link function to be
+\item{family}{a description of the error distribution and link function to be
 used in the model. For glm this can be a character string naming a family 
 function, a family function or the result of a call to a family function. 
 For glm.fit only the third option is supported.}
@@ -26,7 +26,8 @@ For glm.fit only the third option is supported.}
 \item{expData}{the expanded dataset (of class "expData").}
 
 \item{se}{character string indicating the type of standard errors to be calculated.
-The default type is based on the bootstrap.}
+By default robust se are calculated. NOTE: In version 1.0.0 the "bootstrap" method
+does not work properly}
 
 \item{nBoot}{number of bootstrap replicates.}
 
@@ -45,8 +46,9 @@ This function is similar to R function \code{neModel} from the
 \code{medflex} package.
 }
 \details{
-The function 'neModel' is used to fit a natural effect model on the
-expanded dataset.
+The function \code{ds.neModel} is used to fit a natural effect model on the
+expanded dataset. For more details see the help file of the \code{neModel} function 
+in the \code{medflex} package.
 }
 \author{
 Demetris Avraam, for DataSHIELD Development Team

@@ -2,7 +2,7 @@
 #' @title Regression-based causal mediation analysis
 #' @description This function is similar to R function \code{regmedint} from the 
 #' \code{regmedint} package.
-#' @details The function 'regmedint' is used for regression-based causal mediation
+#' @details The function \code{ds.regmedint} is used for regression-based causal mediation
 #' analysis as described in Valeri & VanderWeele 2013 and Valeri & VanderWeele 2015.
 #' @param data a string character, the name of the data frame containing the 
 #' relevant variables.
@@ -40,8 +40,8 @@
 #' @author Demetris Avraam, for DataSHIELD Development Team
 #' @export
 #'
-ds.regmedint <- function(data = NULL, yvar=NULL, avar=NULL, mvar=NULL, cvar=NULL, eventvar=NULL,
-                         a0 = 0, a1 = 1, m_cde = 1, c_cond = 0.5, mreg = "logistic", yreg = "survAFT_weibull", 
+ds.regmedint <- function(data = NULL, yvar = NULL, avar = NULL, mvar = NULL, cvar = NULL, eventvar = NULL,
+                         a0 = 0, a1 = 1, m_cde = 1, c_cond = 0.5, mreg = NULL, yreg = NULL, 
                          interaction = TRUE, casecontrol = FALSE, na_omit = FALSE, datasources = NULL){
 
   # look for DS connections
@@ -60,20 +60,44 @@ ds.regmedint <- function(data = NULL, yvar=NULL, avar=NULL, mvar=NULL, cvar=NULL
   if(is.null(avar)){
     stop(" Please provide the name of the avar of interest!", call.=FALSE)
   }
-  if(is.null(cvar)){
-    stop(" Please provide the name of the cvar variable!", call.=FALSE)
+  if(is.null(mvar)){
+    stop(" Please provide the name of the mvar variable!", call.=FALSE)
   }
+  if(is.null(data)){
+    stop(" Please provide the name of the data frame!", call.=FALSE)
+  }
+  if(is.null(mreg)){
+    stop(" Please provide the mediator regression type!", call.=FALSE)
+  }
+  if(is.null(yreg)){
+    stop(" Please provide the outcome regression type!", call.=FALSE)
+  }
+  
+  # check if the input objects are defined in all studies
+  defined.yvar <- dsBaseClient:::isDefined(datasources, paste0(data, "$", yvar))
+  defined.avar <- dsBaseClient:::isDefined(datasources, paste0(data, "$", avar))
+  defined.mvar <- dsBaseClient:::isDefined(datasources, paste0(data, "$", mvar))
+  if(!is.null(cvar)){
+    lapply(cvar, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", cvar))})
+  }  
+  if(!is.null(eventvar)){
+    defined.eventvar <- dsBaseClient:::isDefined(datasources, paste0(data, "$", eventvar))
+  }  
   
   yvar.name <- yvar
   avar.name <- avar
   mvar.name <- mvar
   data.name <- data
-  #cvar.transmit <- paste0(as.character(cvar), collapse=",")
-  cvar.name <- cvar
+  if(!is.null(cvar)){
+    cvar.name <- paste0(as.character(cvar), collapse=",")
+  }else{
+    cvar.name <- cvar
+  }
   eventvar.name <- eventvar
   
   calltext <- call('regmedintDS', data.name, yvar.name, avar.name, mvar.name, cvar.name, eventvar.name, 
-                   interaction=interaction, casecontrol=casecontrol, na_omit=na_omit)
+                   a0, a1, m_cde, c_cond, mreg, yreg, interaction=interaction, casecontrol=casecontrol, 
+                   na_omit=na_omit)
   study.summary <- DSI::datashield.aggregate(datasources, calltext)
   
   return(study.summary)

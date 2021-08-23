@@ -25,8 +25,8 @@ This function is similar to R function \code{neWeight} from the
 \code{mmedflex} package.
 }
 \details{
-The function 'neWeight' both expands the data along hypothetical exposure
-values and calculates ratio-of-mediator probability weights.
+The function \code{ds.neWeight} both expands the data along hypothetical
+exposure values and calculates ratio-of-mediator probability weights.
 }
 \author{
 Demetris Avraam, for DataSHIELD Development Team

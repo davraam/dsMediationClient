@@ -15,8 +15,8 @@ ds.regmedint(
   a1 = 1,
   m_cde = 1,
   c_cond = 0.5,
-  mreg = "logistic",
-  yreg = "survAFT_weibull",
+  mreg = NULL,
+  yreg = NULL,
   interaction = TRUE,
   casecontrol = FALSE,
   na_omit = FALSE,
@@ -80,7 +80,7 @@ This function is similar to R function \code{regmedint} from the
 \code{regmedint} package.
 }
 \details{
-The function 'regmedint' is used for regression-based causal mediation
+The function \code{ds.regmedint} is used for regression-based causal mediation
 analysis as described in Valeri & VanderWeele 2013 and Valeri & VanderWeele 2015.
 }
 \author{
