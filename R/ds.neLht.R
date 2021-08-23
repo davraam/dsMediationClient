@@ -25,10 +25,13 @@ ds.neLht <- function(model=NULL, datasources=NULL){
     stop("The 'datasources' were expected to be a list of DSConnection-class objects", call.=FALSE)
   }
   
-  # verify that 'formula' was set
+  # verify that name of the fitted model was set
   if(is.null(model)){
     stop(" Please provide the name of a fitted natural effect model object!", call.=FALSE)
   }
+  
+  # check if the fitted model is defined in all studies
+  defined <- dsBaseClient:::isDefined(datasources, model)
   
   model.name <- model
   

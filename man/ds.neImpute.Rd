@@ -25,8 +25,8 @@ This function is similar to R function \code{neImpute} from the
 \code{mmedflex} package.
 }
 \details{
-The function 'neImpute' both expands the data along hypothetical exposure
-values and imputes nested counterfactual outcomes.
+The function \code{ds.neImpute} both expands the data along hypothetical
+exposure values and imputes nested counterfactual outcomes.
 }
 \author{
 Demetris Avraam, for DataSHIELD Development Team

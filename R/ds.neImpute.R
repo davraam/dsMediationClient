@@ -2,8 +2,8 @@
 #' @title Expand the dataset and impute nested counterfactual outcomes
 #' @description This function is similar to R function \code{neImpute} from the 
 #' \code{mmedflex} package.
-#' @details The function 'neImpute' both expands the data along hypothetical exposure
-#' values and imputes nested counterfactual outcomes.
+#' @details The function \code{ds.neImpute} both expands the data along hypothetical
+#' exposure values and imputes nested counterfactual outcomes.
 #' @param object a string character, the name of an object used to select a method.
 #' @param newobj a character string that provides the name for the output object
 #' that is stored on the data servers. Default \code{neImpute.data}. 
@@ -31,6 +31,9 @@ ds.neImpute <- function(object=NULL, newobj=NULL, datasources=NULL){
   if(is.null(object)){
     stop(" Please provide the name of the fitted model object!", call.=FALSE)
   }
+  
+  # check if the model outcome is defined in all studies
+  defined <- dsBaseClient:::isDefined(datasources, object)
   
   if(is.null(newobj)){
     newobj <- 'neImpute.data'
