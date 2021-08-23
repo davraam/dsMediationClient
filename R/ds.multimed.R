@@ -52,6 +52,9 @@ ds.multimed <- function(outcome = NULL, med.main = NULL, med.alt = NULL, treat =
   if(is.null(med.main)){
     stop(" Please provide the name of the mediator of interest!", call.=FALSE)
   }
+  if(is.null(med.alt)){
+    stop(" Please provide the name(s) of the alternative mediator(s)!", call.=FALSE)
+  }
   if(is.null(treat)){
     stop(" Please provide the name of the treatment variable!", call.=FALSE)
   }
@@ -65,31 +68,26 @@ ds.multimed <- function(outcome = NULL, med.main = NULL, med.alt = NULL, treat =
   defined.outcome <- dsBaseClient:::isDefined(datasources, paste0(data, "$", outcome))
   defined.med.main <- dsBaseClient:::isDefined(datasources, paste0(data, "$", med.main))
   defined.treat <- dsBaseClient:::isDefined(datasources, paste0(data, "$", treat))
+  lapply(med.alt, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", x))})
   if(!is.null(covariates)){
     lapply(covariates, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", x))})
   }  
-  if(!is.null(med.alt)){
-    lapply(med.alt, function(x){dsBaseClient:::isDefined(datasources, paste0(data, "$", x))})
-  }
-    
+
   # transmittable names  
   outcome.name <- outcome
   med.main.name <- med.main
   treat.name <- treat
   data.name <- data
+  med.alt.transmit <- paste0(as.character(med.alt), collapse=",")
+  
   if(!is.null(covariates)){
     covariates.transmit <- paste0(as.character(covariates), collapse=",")
   }else{
-    covariates.transmit <- NULL
-  }
-  if(!is.null(med.alt)){
-    med.alt.transmit <- paste0(as.character(med.alt), collapse=",")
-  }else{
-    med.alt.transmit <- NULL
+    covariates.transmit <- covariates
   }
   
   calltext <- call('multimedDS', outcome.name, med.main.name, med.alt.transmit, 
-                   treat.name, covariates.transmit, data, sims, seed, conf.level)
+                   treat.name, covariates.transmit, data, sims, conf.level, seed)
   study.summary <- DSI::datashield.aggregate(datasources, calltext)
   
   return(study.summary)
