@@ -4,10 +4,18 @@
 \alias{ds.neImpute}
 \title{Expand the dataset and impute nested counterfactual outcomes}
 \usage{
-ds.neImpute(object = NULL, newobj = NULL, datasources = NULL)
+ds.neImpute(object = NULL, nMed = 1, newobj = NULL, datasources = NULL)
 }
 \arguments{
 \item{object}{a string character, the name of an object used to select a method.}
+
+\item{nMed}{an integer, the number of mediators to be considered jointly. For example,
+if nMed = 2, not only the second predictor variable, but the two predictor
+variables declared after the exposure variable are internally coded as mediators.
+Correct specification of the (number of) mediators can easily be checked in the summary
+output of the natural effect model object (returned by \code{ds.neModel} function), 
+which lists the names of the exposure and all mediators. Default value of nMed is set
+to 1.}
 
 \item{newobj}{a character string that provides the name for the output object
 that is stored on the data servers. Default \code{neImpute.data}.}
