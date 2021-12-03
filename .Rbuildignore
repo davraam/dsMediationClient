@@ -9,5 +9,3 @@
 ^azure-pipelines_check\.Rout$
 ^azure-pipelines_test\.Rout$
 ^checkDocumentationUpdated\.sh$
-^_pkgdown\.yml$
-^docs$
