@@ -3,6 +3,7 @@
 export(ds.mediate)
 export(ds.mediationTest)
 export(ds.multimed)
+export(ds.neEffdecomp)
 export(ds.neImpute)
 export(ds.neLht)
 export(ds.neModel)

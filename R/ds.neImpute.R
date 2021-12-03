@@ -5,6 +5,13 @@
 #' @details The function \code{ds.neImpute} both expands the data along hypothetical
 #' exposure values and imputes nested counterfactual outcomes.
 #' @param object a string character, the name of an object used to select a method.
+#' @param nMed an integer, the number of mediators to be considered jointly. For example,
+#' if nMed = 2, not only the second predictor variable, but the two predictor
+#' variables declared after the exposure variable are internally coded as mediators.
+#' Correct specification of the (number of) mediators can easily be checked in the summary
+#' output of the natural effect model object (returned by \code{ds.neModel} function), 
+#' which lists the names of the exposure and all mediators. Default value of nMed is set
+#' to 1.
 #' @param newobj a character string that provides the name for the output object
 #' that is stored on the data servers. Default \code{neImpute.data}. 
 #' @param datasources a list of \code{\link{DSConnection-class}} 
@@ -15,7 +22,7 @@
 #' @author Demetris Avraam, for DataSHIELD Development Team
 #' @export
 #'
-ds.neImpute <- function(object=NULL, newobj=NULL, datasources=NULL){
+ds.neImpute <- function(object=NULL, nMed=1, newobj=NULL, datasources=NULL){
   
   # look for DS connections
   if(is.null(datasources)){
@@ -39,7 +46,7 @@ ds.neImpute <- function(object=NULL, newobj=NULL, datasources=NULL){
     newobj <- 'neImpute.data'
   }
   
-  calltext <- call('neImputeDS', object)
+  calltext <- call('neImputeDS', object, nMed)
   DSI::datashield.assign(datasources, newobj, calltext)
   
 }  
