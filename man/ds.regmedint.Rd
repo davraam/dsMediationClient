@@ -11,15 +11,16 @@ ds.regmedint(
   mvar = NULL,
   cvar = NULL,
   eventvar = NULL,
-  a0 = 0,
+  a0 = NULL,
   a1 = 1,
   m_cde = 1,
-  c_cond = 0.5,
+  c_cond = NULL,
   mreg = NULL,
   yreg = NULL,
   interaction = TRUE,
   casecontrol = FALSE,
   na_omit = FALSE,
+  exponentiate = FALSE,
   datasources = NULL
 )
 }
@@ -67,6 +68,9 @@ a case-control study.}
 
 \item{na_omit}{a logical vector of length 1. Default to FALSE. Whether to use na.omit() function
 in stats package to remove NAs in columns of interest before fitting the models.}
+
+\item{exponentiate}{a logical vector of length 1. Default to FALSE. Whether to exponentiate
+the estimates to measure the odds ratio incase of a logistic regression model.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} 
 objects obtained after login. If the \code{datasources} argument is not specified
