@@ -112,7 +112,7 @@ ds.regmedint <- function (data = NULL, yvar = NULL, avar = NULL, mvar = NULL,
     c_cond.name <- c_cond
   }
   eventvar.name <- eventvar
-  calltext <- call("regmedintDS", data.name, yvar.name, avar.name, 
+  calltext <- call("regmedintDS2", data.name, yvar.name, avar.name, 
                    mvar.name, cvar.name, eventvar.name, a0, a1, m_cde, c_cond.name, 
                    mreg, yreg, interaction = interaction, casecontrol = casecontrol, 
                    na_omit = na_omit, exponentiate = exponentiate)
