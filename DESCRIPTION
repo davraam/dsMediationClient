@@ -1,6 +1,6 @@
 Package: dsMediationClient
 Title: DataSHIELD Client Mediation Functions
-Version: 0.0.2
+Version: 0.0.3
 Author: DataSHIELD Developers <datashield@newcastle.ac.uk>
 Maintainer: DataSHIELD Developers <datashield@newcastle.ac.uk>
 Description: DataSHIELD client functions for mediation.
@@ -11,5 +11,5 @@ Depends:
 Imports:
     dsBaseClient,
     methods
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Encoding: UTF-8
