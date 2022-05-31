@@ -41,7 +41,7 @@ ds.neLht <- function(model=NULL, linfct=NULL, datasources=NULL){
     linfct <- gsub(" ", "", linfct, fixed = TRUE)
   }
   
-  calltext <- call('neLhtDS2', model, linfct)
+  calltext <- call('neLhtDS', model, linfct)
   out <- DSI::datashield.aggregate(datasources, calltext)
   
   return(out)
