@@ -1,9 +1,9 @@
 Package: dsMediationClient
-Title: DataSHIELD Client Mediation Functions
+Title: DataSHIELD Client site Mediation Analysis Functions
+Description: DataSHIELD client functions for mediation analysis.
 Version: 0.0.3
 Author: DataSHIELD Developers <datashield@newcastle.ac.uk>
 Maintainer: DataSHIELD Developers <datashield@newcastle.ac.uk>
-Description: DataSHIELD client functions for mediation.
 License: GPL-3
 Depends:
     R (>= 3.5.0),
