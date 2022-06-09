@@ -18,7 +18,7 @@ regmedint package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dsMediationClient</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3</span>
       </span>
     </div>
 
@@ -53,15 +53,16 @@ regmedint package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
   mvar <span class="op">=</span> <span class="cn">NULL</span>,
   cvar <span class="op">=</span> <span class="cn">NULL</span>,
   eventvar <span class="op">=</span> <span class="cn">NULL</span>,
-  a0 <span class="op">=</span> <span class="fl">0</span>,
+  a0 <span class="op">=</span> <span class="cn">NULL</span>,
   a1 <span class="op">=</span> <span class="fl">1</span>,
   m_cde <span class="op">=</span> <span class="fl">1</span>,
-  c_cond <span class="op">=</span> <span class="fl">0.5</span>,
+  c_cond <span class="op">=</span> <span class="cn">NULL</span>,
   mreg <span class="op">=</span> <span class="cn">NULL</span>,
   yreg <span class="op">=</span> <span class="cn">NULL</span>,
   interaction <span class="op">=</span> <span class="cn">TRUE</span>,
   casecontrol <span class="op">=</span> <span class="cn">FALSE</span>,
   na_omit <span class="op">=</span> <span class="cn">FALSE</span>,
+  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,
   datasources <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -112,6 +113,9 @@ a case-control study.</p></dd>
 <dt>na_omit</dt>
 <dd><p>a logical vector of length 1. Default to FALSE. Whether to use na.omit() function
 in stats package to remove NAs in columns of interest before fitting the models.</p></dd>
+<dt>exponentiate</dt>
+<dd><p>a logical vector of length 1. Default to FALSE. Whether to exponentiate
+the estimates to measure the odds ratio incase of a logistic regression model.</p></dd>
 <dt>datasources</dt>
 <dd><p>a list of <code>DSConnection-class</code> 
 objects obtained after login. If the <code>datasources</code> argument is not specified
