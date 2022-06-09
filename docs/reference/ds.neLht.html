@@ -18,7 +18,7 @@ medflex package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dsMediationClient</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@ medflex package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ds.neLht</span><span class="op">(</span>model <span class="op">=</span> <span class="cn">NULL</span>, datasources <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ds.neLht</span><span class="op">(</span>model <span class="op">=</span> <span class="cn">NULL</span>, linfct <span class="op">=</span> <span class="cn">NULL</span>, datasources <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -54,6 +54,8 @@ medflex package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <dl><dt>model</dt>
 <dd><p>the name of a fitted natural effect model object. This is the
 object saved on the server-side by the <code>ds.neModel</code> function.</p></dd>
+<dt>linfct</dt>
+<dd><p>a specification of the linear hypothesis to be tested.</p></dd>
 <dt>datasources</dt>
 <dd><p>a list of <code>DSConnection-class</code> 
 objects obtained after login. If the <code>datasources</code> argument is not specified
