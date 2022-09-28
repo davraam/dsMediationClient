@@ -4,11 +4,13 @@
 \alias{ds.neLht}
 \title{Linear hypotheses for natural effect models}
 \usage{
-ds.neLht(model = NULL, datasources = NULL)
+ds.neLht(model = NULL, linfct = NULL, datasources = NULL)
 }
 \arguments{
 \item{model}{the name of a fitted natural effect model object. This is the
 object saved on the server-side by the \code{ds.neModel} function.}
+
+\item{linfct}{a specification of the linear hypothesis to be tested.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} 
 objects obtained after login. If the \code{datasources} argument is not specified
