@@ -41,14 +41,26 @@ context("ds.mediate::smk_expt::sims=10")
 test_that("mediate sims 10", {
     med.out <- ds.mediate(model.m = 'med.fit', model.y = 'out.fit', treat = "att", mediator = "negaff", boot = FALSE, conf.level = 0.95, robustSE = TRUE, sims = 10, seed = 123)
 
-    expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims10.rds')
+    if (ds.test_env$driver == "OpalDriver") {
+        expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims10_opal.rds')
+    } else if (ds.test_env$driver == "ArmadilloDriver") {
+        expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims10_armadillo.rds')
+    } else {
+        stop("Unknown Driver")
+    }
 })
 
 context("ds.mediate::smk_expt::sims=100")
 test_that("mediate sims 100", {
     med.out <- ds.mediate(model.m = 'med.fit', model.y = 'out.fit', treat = "att", mediator = "negaff", boot = FALSE, conf.level = 0.95, robustSE = TRUE, sims = 100, seed = 123)
 
-    expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims100.rds')
+    if (ds.test_env$driver == "OpalDriver") {
+        expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims100_opal.rds')
+    } else if (ds.test_env$driver == "ArmadilloDriver") {
+        expect_equal_to_reference(med.out, 'smk_expt-results/ds.mediate_sims100_armadillo.rds')
+    } else {
+        stop("Unknown Driver")
+    }
 })
 
 #

@@ -28,12 +28,23 @@ context("MEDIATION_UPB::datachk")
 test_that("Check MEDIATION_UPB dataset", {
     res.class <- ds.class(x='D')
     expect_length(res.class, 3)
-    expect_length(res.class$study1, 1)
-    expect_equal(res.class$study1, "data.frame")
-    expect_length(res.class$study2, 1)
-    expect_equal(res.class$study2, "data.frame")
-    expect_length(res.class$study3, 1)
-    expect_equal(res.class$study3, "data.frame")
+    if (ds.test_env$driver == "OpalDriver") {
+        expect_length(res.class$study1, 1)
+        expect_true(all(c("data.frame") %in% res.class$study1))
+        expect_length(res.class$study2, 1)
+        expect_true(all(c("data.frame") %in% res.class$study2))
+        expect_length(res.class$study3, 1)
+        expect_true(all(c("data.frame") %in% res.class$study3))
+    } else if (ds.test_env$driver == "ArmadilloDriver") {
+        expect_length(res.class$study1, 4)
+        expect_true(all(c("spec_tbl_df", "tbl_df", "tbl", "data.frame") %in% res.class$study1))
+        expect_length(res.class$study2, 4)
+        expect_true(all(c("spec_tbl_df", "tbl_df", "tbl", "data.frame") %in% res.class$study2))
+        expect_length(res.class$study3, 4)
+        expect_true(all(c("spec_tbl_df", "tbl_df", "tbl", "data.frame") %in% res.class$study3))
+    } else {
+        stop("Unknown Driver")
+    }
 
     res.length <- ds.length(x='D')
     expect_length(res.length, 4)

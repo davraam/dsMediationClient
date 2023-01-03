@@ -16,6 +16,7 @@ context("setup - start")
 library(DSI)
 library(DSOpal)
 library(DSLite)
+library(DSMolgenisArmadillo)
 library(dsBaseClient)
 
 source("dstest_functions/ds_expect_variables.R")

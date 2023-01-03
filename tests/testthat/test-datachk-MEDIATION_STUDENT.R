@@ -28,8 +28,15 @@ context("MEDIATION_STUDENT::datachk")
 test_that("Check MEDIATION_STUDENT dataset", {
     res.class <- ds.class(x='D')
     expect_length(res.class, 1)
-    expect_length(res.class$study1, 1)
-    expect_equal(res.class$study1, "data.frame")
+    if (ds.test_env$driver == "OpalDriver") {
+        expect_length(res.class$study1, 1)
+        expect_true(all(c("data.frame") %in% res.class$study1))
+    } else if (ds.test_env$driver == "ArmadilloDriver") {
+        expect_length(res.class$study1, 4)
+        expect_true(all(c("spec_tbl_df", "tbl_df", "tbl", "data.frame") %in% res.class$study1))
+    } else {
+        stop("Unknown Driver")
+    }
 
     res.length <- ds.length(x='D')
     expect_length(res.length, 2)
