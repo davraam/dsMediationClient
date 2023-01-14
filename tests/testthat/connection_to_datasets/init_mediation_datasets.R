@@ -5,9 +5,17 @@ init.mediation.dataset.upb <- function(variables)
         if (ds.test_env$driver == "OpalDriver")
         {
             builder <- DSI::newDSLoginBuilder(.silent = TRUE)
-            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.UPBdata1", options=ds.test_env$options_1)
-            builder$append(server = "study2", url = ds.test_env$ip_address_2, user = ds.test_env$user_2, password = ds.test_env$password_2, table = "MEDIATION.UPBdata2", options=ds.test_env$options_2)
-            builder$append(server = "study3", url = ds.test_env$ip_address_3, user = ds.test_env$user_3, password = ds.test_env$password_3, table = "MEDIATION.UPBdata3", options=ds.test_env$options_3)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.UPBdata1", options=ds.test_env$options_1, driver = ds.test_env$driver)
+            builder$append(server = "study2", url = ds.test_env$ip_address_2, user = ds.test_env$user_2, password = ds.test_env$password_2, table = "MEDIATION.UPBdata2", options=ds.test_env$options_2, driver = ds.test_env$driver)
+            builder$append(server = "study3", url = ds.test_env$ip_address_3, user = ds.test_env$user_3, password = ds.test_env$password_3, table = "MEDIATION.UPBdata3", options=ds.test_env$options_3, driver = ds.test_env$driver)
+            ds.test_env$login.data <- builder$build()
+        }
+        else if (ds.test_env$driver == "ArmadilloDriver")
+        {
+            builder <- DSI::newDSLoginBuilder(.silent = TRUE)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "datashield/MEDIATION/UPBdata1", driver = ds.test_env$driver)
+            builder$append(server = "study2", url = ds.test_env$ip_address_2, user = ds.test_env$user_2, password = ds.test_env$password_2, table = "datashield/MEDIATION/UPBdata2", driver = ds.test_env$driver)
+            builder$append(server = "study3", url = ds.test_env$ip_address_3, user = ds.test_env$user_3, password = ds.test_env$password_3, table = "datashield/MEDIATION/UPBdata3", driver = ds.test_env$driver)
             ds.test_env$login.data <- builder$build()
         }
         else 
@@ -25,7 +33,14 @@ init.mediation.dataset.student <- function(variables)
         if (ds.test_env$driver == "OpalDriver")
         {
             builder <- DSI::newDSLoginBuilder(.silent = TRUE)
-            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.student", options=ds.test_env$options_1)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.student", options=ds.test_env$options_1, driver = ds.test_env$driver)
+
+            ds.test_env$login.data <- builder$build()
+        }
+        else if (ds.test_env$driver == "ArmadilloDriver")
+        {
+            builder <- DSI::newDSLoginBuilder(.silent = TRUE)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "datashield/MEDIATION/student", options=ds.test_env$options_1, driver = ds.test_env$driver)
             ds.test_env$login.data <- builder$build()
         }
         else 
@@ -43,7 +58,13 @@ init.mediation.dataset.framing <- function(variables)
         if (ds.test_env$driver == "OpalDriver")
         {
             builder <- DSI::newDSLoginBuilder(.silent = TRUE)
-            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.framing", options=ds.test_env$options_1)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.framing", options=ds.test_env$options_1, driver = ds.test_env$driver)
+            ds.test_env$login.data <- builder$build()
+        }
+        else if (ds.test_env$driver == "ArmadilloDriver")
+        {
+            builder <- DSI::newDSLoginBuilder(.silent = TRUE)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "datashield/MEDIATION/framing", options=ds.test_env$options_1, driver = ds.test_env$driver)
             ds.test_env$login.data <- builder$build()
         }
         else 
@@ -61,7 +82,13 @@ init.mediation.dataset.vv2015 <- function(variables)
         if (ds.test_env$driver == "OpalDriver")
         {
             builder <- DSI::newDSLoginBuilder(.silent = TRUE)
-            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.vv2015", options=ds.test_env$options_1)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "MEDIATION.vv2015", options=ds.test_env$options_1, driver = ds.test_env$driver)
+            ds.test_env$login.data <- builder$build()
+        }
+        else if (ds.test_env$driver == "ArmadilloDriver")
+        {
+            builder <- DSI::newDSLoginBuilder(.silent = TRUE)
+            builder$append(server = "study1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "datashield/MEDIATION/vv2015", options=ds.test_env$options_1, driver = ds.test_env$driver)
             ds.test_env$login.data <- builder$build()
         }
         else 
